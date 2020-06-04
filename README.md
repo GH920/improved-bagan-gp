@@ -1,5 +1,4 @@
 # Improve-Medical-Image-Classification-with-GAN
- 
 ## Proposal
 ### Problem statement
 Medical image datasets are always highly imbalanced due to the rare pathologic cases. We need to generate high quality images of the minority. In this project, we will apply GANs to synthesis images for data augmentation. With the same baseline model, we will compare the improvement of the augmented dataset.
@@ -7,8 +6,14 @@ Medical image datasets are always highly imbalanced due to the rare pathologic c
 At the beginning, dataset 1 is used to build our model. It is easy to train and tune. Then, if we have time, dataset 2 (over 100GB) would be used. With the leaderboard, it is better to examine the performance of our model.  
 1) Small dataset: Red blood cells (from ML II exams).  
 2) Large dataset: SIIM-ISIC Melanoma Classification. Identifying melanoma in lesion images (from Kaggle ongoing competition).  
-### Technique and framework
-Generative Adversarial Networks (GANs).  
+### Technique
+1) Generative Adversarial Networks (GANs)  
+2) Semi-Supervised Learning
+### Framework
+[![Python 3.6](https://img.shields.io/badge/Python-3.7-blue.svg)](#)  
+Potential framework (one of follows)
+1) Pytorch
+2) Keras
 ### Evaluation and metrics
 #### Evaluation of GAN model: 
 Inception Score: measure the image quality.  
