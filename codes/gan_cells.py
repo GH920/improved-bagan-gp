@@ -25,7 +25,7 @@ LR = 0.0002
 
 real_100 = np.load('x_train.npy')
 labels = np.load('y_train.npy')
-real_100 = real_100[labels==3]
+real_100 = real_100[labels==1]
 
 real = np.ndarray(shape=(real_100.shape[0], 64, 64, 3))
 for i in range(real_100.shape[0]):
@@ -130,6 +130,7 @@ def discriminator_fc():
     out = Dense(1, activation='sigmoid', kernel_initializer=weight_init)(x)
 
     discriminator = Model(inputs=img, outputs=out)
+    discriminator.compile(optimizer=optimizer, loss='binary_crossentropy', metrics=['accuracy'])
     return discriminator
 
 
@@ -231,7 +232,7 @@ for learning_step in range(LEARNING_STEPS):
     #     acc = gan.loss_D[1]
     #     iteration = [int(5 * (1-acc)) + 1, int(5 * acc) + 1]
     gan.train(real, epochs=EPOCHS, batch_size=BATCH_SIZE)
-    if (learning_step+1)%1 == 0:
+    if (learning_step+1)%3 == 0:
         plt_img(gan)
     if (learning_step+1)%50 == 0:
-        gan.gen.save('gan_generator_%d_type3.h5' % (learning_step*100+100))
+        gan.gen.save('gan_generator_%d_type1.h5' % (learning_step*100+100))
