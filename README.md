@@ -12,6 +12,7 @@ At the beginning, dataset 1 is used to build our model. It is easy to train and 
 ### Framework
 [![Python 3.6](https://img.shields.io/badge/Python-3.7-blue.svg)](#)  
 1) Keras
+2) TensorFlow (2.2)
 ### Evaluation and metrics
 #### Evaluation of GAN model: 
 Inception Score: measure the image quality.  
