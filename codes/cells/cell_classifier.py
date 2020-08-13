@@ -30,19 +30,27 @@ DROPOUT = 0.3
 # %% -------------------------------------- Data Prep ------------------------------------------------------------------
 x, y = np.load('x_train.npy'), np.load('y_train.npy')
 
-# Augmentation by GAN-generated images
-x_aug_type1 = np.load('gen_samples_type1.npy')
-x_aug_type2 = np.load('gen_samples_type2.npy')
-x_aug_type3 = np.load('gen_samples_type3.npy')
-x_aug = np.append(x, x_aug_type1, axis=0)
-x_aug = np.append(x_aug, x_aug_type2, axis=0)
-x_aug = np.append(x_aug, x_aug_type3, axis=0)
-y_aug = np.append(y, np.ones(1000))
-y_aug = np.append(y_aug, np.ones(1000) * 2)
-y_aug = np.append(y_aug, np.ones(1000) * 3)
+n_classes = len(np.unique(y))
+# GAN based augmentation
+from tensorflow.keras.models import load_model
+gen_path = 'bagan_gp_cells_v3_2_epoch100.h5'
+gen = load_model(gen_path)
+total_tize = len(y)
+aug_size = 2 * total_tize//n_classes
 
+for c in range(n_classes):
+    sample_size = aug_size
+    label = np.ones(sample_size) * c
+    noise = np.random.normal(0, 1, (sample_size, gen.input_shape[0][1]))
+    print('Latent dimension:', gen.input_shape[0][1])
+    gen_sample = gen.predict([noise, label])
+    gen_imgs = (gen_sample*0.5 + 0.5)*255
+    x = np.append(x, gen_imgs, axis=0)
+    y = np.append(y, label)
+    print('Augmented dataset size:', sample_size, 'Total dataset size:', len(y))
 
 x_train, y_train = x, y
+
 # # -- GAN-based augmentation --
 # x_train, y_train = x_aug, y_aug
 # # -- GAN-based augmentation -- Comment it out to remove augmentation.
@@ -53,16 +61,16 @@ x_test, y_test = np.load('x_val.npy'), np.load('y_val.npy')
 x_train, x_test = x_train/255.0, x_test/255.0
 y_train, y_test = to_categorical(y_train, num_classes=4), to_categorical(y_test, num_classes=4)
 
-# # -- Traditional augmentation --
-# datagen = ImageDataGenerator(rotation_range=40,
-#                              # samplewise_center=True,
-#                              # width_shift_range=0.3,
-#                              # height_shift_range=0.3,
-#                              shear_range=0.2,
-#                              zoom_range=0.2,
-#                              horizontal_flip=True,
-#                              vertical_flip=True)
-# datagen.fit(x_train)
+# -- Traditional augmentation --
+datagen = ImageDataGenerator(rotation_range=40,
+                             # samplewise_center=True,
+                             # width_shift_range=0.3,
+                             # height_shift_range=0.3,
+                             shear_range=0.2,
+                             zoom_range=0.2,
+                             horizontal_flip=True,
+                             vertical_flip=True)
+datagen.fit(x_train)
 #
 # # -- Traditional augmentation -- Comment it out to remove augmentation.
 
@@ -81,20 +89,20 @@ x = BatchNormalization()(x)
 x = MaxPooling2D(2)(x)
 x = Flatten()(x)
 x = Dropout(DROPOUT)(x)
-out = Dense(4, activation='sigmoid')(x)
+out = Dense(4, activation='softmax')(x)
 
 model = Model(inputs=img, outputs=out)
-model.compile(optimizer=Adam(LR), loss='binary_crossentropy', metrics=['accuracy'])
+model.compile(optimizer=Adam(LR), loss='categorical_crossentropy', metrics=['accuracy'])
 
 
 # %% -------------------------------------- Training Loop ----------------------------------------------------------
-model.fit(x_train, y_train, batch_size=BATCH_SIZE, epochs=N_EPOCHS, validation_data=(x_test, y_test),
-          callbacks=[
-              ModelCheckpoint("cell_classifier01.hdf5", monitor="val_loss", save_best_only=True),
-              EarlyStopping(monitor='val_loss', min_delta=0, patience=7, verbose=0, mode='auto')
-              ],
-          )
-# model.fit(datagen.flow(x_train, y_train, batch_size=32), steps_per_epoch=len(x_train) / 32, epochs=N_EPOCHS, validation_data=(x_test, y_test))
+# model.fit(x_train, y_train, batch_size=BATCH_SIZE, epochs=N_EPOCHS, validation_data=(x_test, y_test),
+#           # callbacks=[
+#           #     ModelCheckpoint("cell_classifier01.hdf5", monitor="val_loss", save_best_only=True),
+#           #     EarlyStopping(monitor='val_loss', min_delta=0, patience=7, verbose=0, mode='auto')
+#           #     ],
+#           )
+model.fit(datagen.flow(x_train, y_train, batch_size=32), steps_per_epoch=len(x_train) / 32, epochs=N_EPOCHS, validation_data=(x_test, y_test))
 
 # %% ------------------------------------------ Final test -------------------------------------------------------------
 
