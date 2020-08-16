@@ -24,21 +24,21 @@ weight_init = glorot_normal(seed=SEED)
 
 
 # from tensorflow.keras.datasets.fashion_mnist import load_data
-from tensorflow.keras.datasets.cifar10 import load_data
-(real_100, labels), (_,_) = load_data()
-# X = real_100.reshape((-1, 28, 28, 1))
-labels = labels.reshape(-1)
-# convert from ints to floats
-real_100 = real_100.astype('float32')
+# from tensorflow.keras.datasets.cifar10 import load_data
+# (real_100, labels), (_,_) = load_data()
+# # X = real_100.reshape((-1, 28, 28, 1))
+# labels = labels.reshape(-1)
+# # convert from ints to floats
+# real_100 = real_100.astype('float32')
 
-# # create imbalanced datasets
+# create imbalanced datasets
 # for c in range(1, 10):
 #     real_100 = np.vstack([real_100[labels!=c], real_100[labels==c][:100*c]])
 #     labels = np.append(labels[labels!=c], np.ones(100*c) * c)
 
 # # use our datasets
-# real_100 = np.load('x_train.npy')
-# labels = np.load('y_train.npy')
+real_100 = np.load('x_train.npy')
+labels = np.load('y_train.npy')
 # real_100 = real_100[labels==1]
 
 channel = 3
@@ -55,7 +55,7 @@ x_test = (x_test.astype('float32') - 127.5) / 127.5
 
 
 # latent space of noise
-optimizer = Adam(lr=0.0002, beta_1=0.5, beta_2=0.9)
+optimizer = Adam(lr=0.0002, beta_1=0.5)
 latent_dim=(128,)
 n_classes = len(np.unique(y_train))
 trainRatio = 5
@@ -173,7 +173,7 @@ em = embedding_labeled_latent()
 ae = autoencoder_trainer(en, de, em)
 
 ae.fit([x_train, y_train], x_train,
-       epochs=30,
+       epochs=40,
        batch_size=128,
        shuffle=True,
        validation_data=([x_test, y_test], x_test))
@@ -428,7 +428,6 @@ from tensorflow.keras.models import load_model
 # Get the wgan-like model
 # d_model = build_discriminator(en)
 d_model = discriminator_wgan()
-# g_model = load_model('decoder_cells_epoch50.h5')
 g_model = generator_label(em, de)
 
 bagan_gp = BAGAN_GP(
@@ -446,7 +445,7 @@ bagan_gp.compile(
     d_loss_fn=discriminator_loss,
 )
 
-def plt_img(generator):
+def plt_img(generator, epoch):
     np.random.seed(42)
     latent_gen = np.random.normal(size=(n_classes, latent_dim[0]))
 
@@ -476,14 +475,40 @@ def plt_img(generator):
                 plt.gray()
             ax.get_xaxis().set_visible(False)
             ax.get_yaxis().set_visible(False)
-
+    plt.savefig('bagan_gp_results/generated_plot_%d.png' % epoch)
     plt.show()
     return
 
+# make directory to store results
+os.system('mkdir -p bagan_gp_results')
+
+d_loss_history = []
+g_loss_history = []
 # Start training
-LEARNING_STEPS = 10
+LEARNING_STEPS = 50
 for learning_step in range(LEARNING_STEPS):
     print('LEARNING STEP # ', learning_step + 1, '-' * 50)
     bagan_gp.fit(x_train, y_train, batch_size=128, epochs=2)
+    d_loss_history += bagan_gp.history.history['d_loss']
+    g_loss_history += bagan_gp.history.history['g_loss']
     if (learning_step+1)%1 == 0:
-        plt_img(bagan_gp.generator)
+        plt_img(bagan_gp.generator, learning_step)
+
+# plot loss of G and D
+plt.plot(d_loss_history, label='D')
+plt.plot(g_loss_history, label='G')
+plt.legend()
+plt.show()
+
+# save gif
+import imageio
+ims = []
+for i in range(LEARNING_STEPS):
+    fname = 'generated_plot_%d.png' % i
+    dir = 'bagan_gp_results/'
+    if fname in os.listdir(dir):
+        print('loading png...', i)
+        im = imageio.imread(dir + fname, 'png')
+        ims.append(im)
+print('saving as gif...')
+imageio.mimsave(dir + 'training_demo4.gif', ims, fps=3)
