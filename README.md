@@ -1,4 +1,4 @@
-# Improve-Medical-Image-Classification-with-GAN
+# Improved-Balancing-GAN-Minority-class-Image-Generation
 ## Proposal
 ### Problem statement
 Medical image datasets are always highly imbalanced due to the rare pathologic cases. We need to generate high quality images of the minority. In this project, we will apply GANs to synthesis images for data augmentation. With the same baseline model, we will compare the improvement of the augmented dataset.
