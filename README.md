@@ -20,10 +20,10 @@ Although Balancing GAN (BAGAN) proposed an autoencoder initialization to stabili
 |Imbalanced|3490|	71|	130|	221|	269|	349	|435|	485|	572|	628|
 
 2) Small-scale imbalanced medical image dataset: Red blood cells `wget https://storage.googleapis.com/exam-deep-learning/train.zip`.  
-|`Cells`	|“red blood cell”|	“ring”|	“schizont”|	“trophozoite”|
+|`Cells`	|red blood cell (normal)|	ring|	schizont|	trophozoite|
 | --- | --- |--- | --- |--- |
-|Train|5600|	292	|106|	887|
-|Test|1400	|73	|27|	|222|
+|Train| 5600|	292	|106|	887|
+|Test| 1400	|73	|27| 222|
 
 ### Networks
 Some neural networks we've referred to in the work:  
