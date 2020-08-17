@@ -36,11 +36,10 @@ Some neural networks we've referred to in the work:
 1) Keras
 2) TensorFlow (2.2)
 ### Metrics
-Fréchet Inception Distance
-<img src="https://render.githubusercontent.com/render/math?math=FID=\ensuremath{\Vert}\mu_r-\mu_g\ensuremath{\Vert}^{2}%BTr\left(\Sigma_r%B\Sigma_g-2\left(\Sigma_r\Sigma_g\right)^{1/2}\right)">
-```math
+Fréchet Inception Distance  
+<a href="https://www.codecogs.com/eqnedit.php?latex=FID=\ensuremath{\Vert}\mu_r-\mu_g\ensuremath{\Vert}^{2}&plus;Tr\left(\Sigma_r&plus;\Sigma_g-2\left(\Sigma_r\Sigma_g\right)^{1/2}\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?FID=\ensuremath{\Vert}\mu_r-\mu_g\ensuremath{\Vert}^{2}&plus;Tr\left(\Sigma_r&plus;\Sigma_g-2\left(\Sigma_r\Sigma_g\right)^{1/2}\right)" title="FID=\ensuremath{\Vert}\mu_r-\mu_g\ensuremath{\Vert}^{2}+Tr\left(\Sigma_r+\Sigma_g-2\left(\Sigma_r\Sigma_g\right)^{1/2}\right)" /></a>  
+FID calculates the feature-level distance between the generated sample distribution and the real sample distribution by Inception V3 network.
 FID=\ensuremath{\Vert}\mu_r-\mu_g\ensuremath{\Vert}^{2}+Tr\left(\Sigma_r+\Sigma_g-2\left(\Sigma_r\Sigma_g\right)^{1/2}\right)
-```
 #### Evaluation of GAN model: 
 Inception Score: measure the image quality.  
 Multi-scale Structural Similarity (MS-SSIM): measure the diversity and avoid mode collapse.  
