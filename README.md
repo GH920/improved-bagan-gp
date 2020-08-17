@@ -1,19 +1,46 @@
 # Improved-Balancing-GAN-Minority-class-Image-Generation
-## Proposal
+
 ### Problem statement
-Medical image datasets are always highly imbalanced due to the rare pathologic cases. We need to generate high quality images of the minority. In this project, we will apply GANs to synthesis images for data augmentation. With the same baseline model, we will compare the improvement of the augmented dataset.
+Although Balancing GAN (BAGAN) proposed an autoencoder initialization to stabilize the GAN training, sometimes the performance of BAGAN is still unstable especially on medical image datasets. Medical image datasets are always: 1. highly imbalanced due to the rare pathological cases, 2. hard to distinguish the difference among classes. As shown in <a href="https://arxiv.org/pdf/1803.09655.pdf">BAGAN paper</a>, the imbalanced `Flowers` dateset has many similar classes so that BAGAN performs not well. In our experiments, BAGAN fails to generate good samples on a small-scale medical image dataset. We consider that the encoder fails to separate images by class when translating them into latent vectors. Our objective of this work is to generate minority-class images in high quality even with a small-scale imbalanced dataset. Our contributions are:  
+  - We improve the loss function of BAGAN with gradient penalty and build the corresponding architecture of the generator and the discriminator (BAGAN-GP).
+  - We propose a novel architecture of autoencoder with an intermediate embedding model, which helps the autoencoder learn the label information directly.
+  - We discuss the drawbacks of the original BAGAN and exemplify performance improvements over the original BAGAN and demonstrate the potential reasons.
+
 ### Dataset
-At the beginning, dataset 1 is used to build our model. It is easy to train and tune. Then, if we have time, dataset 2 (over 100GB) would be used. With the leaderboard, it is better to examine the performance of our model.  
-1) Small dataset: Red blood cells (from ML II exams).  
-2) Large dataset: SIIM-ISIC Melanoma Classification. Identifying melanoma in lesion images (from Kaggle ongoing competition).  
-### Technique
-1) Generative Adversarial Networks (GANs)  
-2) Semi-Supervised Learning
+1) `MNIST Fashion` and `CIFAR-10`. We also create an imbalanced version for these two datasets.  
+
+|`MNIST Fashion`	| T-shirt |	Trouser |	Pullover  |	Dress |	Coat  |	Sandal  |	Shirt |	Sneaker |	Bag |	Boot  |
+| --- | --- |--- | --- |--- |--- | ---| ---| ---| ---| ---|
+|Balanced|	4231  |	4165  |	4199  |	4211  |	4185  |	4217  |	4189  |	4241  |	4175  |	4187  |
+|Imbalanced|	4166  |	73  |	139 |	210 |	287 |	370 |	422 |	387 |	545 |	651 |  
+
+|`CIFAR-10`	|Airplane|	Automobile	|Bird	|Cat|	Deer|	Dog	|Frog|	Horse|	Ship	|Truck|
+| --- | --- |--- | --- |--- |--- | ---| ---| ---| ---| ---|
+|Balanced|	3527	|3523|	3500|	3458|	3563|	3455|	3535|	3509	|3453	|3476|
+|Imbalanced|3490|	71|	130|	221|	269|	349	|435|	485|	572|	628|
+
+2) Small-scale imbalanced medical image dataset: Red blood cells `wget https://storage.googleapis.com/exam-deep-learning/train.zip`.  
+|`Cells`	|“red blood cell”|	“ring”|	“schizont”|	“trophozoite”|
+| --- | --- |--- | --- |--- |
+|Train|5600|	292	|106|	887|
+|Test|1400	|73	|27|	|222|
+
+### Networks
+Some neural networks we've referred to in the work:  
+1) Generative Adversarial Networks (GANs): BAGAN, WGAN-GP, DRAGAN, ACGAN.  
+2) Autoencoder.  
+3) Pre-trained networks: ResNet50, Inception V3.
+
 ### Framework
 [![Python 3.6](https://img.shields.io/badge/Python-3.7-blue.svg)](#)  
 1) Keras
 2) TensorFlow (2.2)
-### Evaluation and metrics
+### Metrics
+Fréchet Inception Distance
+<img src="https://render.githubusercontent.com/render/math?math=FID=\ensuremath{\Vert}\mu_r-\mu_g\ensuremath{\Vert}^{2}%BTr\left(\Sigma_r%B\Sigma_g-2\left(\Sigma_r\Sigma_g\right)^{1/2}\right)">
+```math
+FID=\ensuremath{\Vert}\mu_r-\mu_g\ensuremath{\Vert}^{2}+Tr\left(\Sigma_r+\Sigma_g-2\left(\Sigma_r\Sigma_g\right)^{1/2}\right)
+```
 #### Evaluation of GAN model: 
 Inception Score: measure the image quality.  
 Multi-scale Structural Similarity (MS-SSIM): measure the diversity and avoid mode collapse.  
