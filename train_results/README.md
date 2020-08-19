@@ -1,4 +1,4 @@
-# training-demo
+# Training-Demo
 ## CIFAR-10 (balanced-version) with BAGAN-GP
 <img src='training_demo_bagan_gp_cifar.gif' width='600px'>
 
