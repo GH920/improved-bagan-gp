@@ -38,7 +38,8 @@ Run `fetch_data.py` before doing the following instructions, if you don't have y
 
 ### TSNE visualizations
 - Run `tsne_plot.py` to see the distribution of labeled latent vectors. 
-  We have two example encoders (BAGAN, BAGAN-GP) and one example embedding model (BAGAN-GP) for running this code.
+  We have two example encoders (`bagan_encoder.h5` for BAGAN, `bagan_gp_encoder1.h5` for BAGAN-GP) 
+  and one example embedding model (`bagan_gp_embedding1.h5`) for running this code.
 
 - Run `tsne_feature_resnet.py` to see the feature level distribution of the generated samples and real samples.
   We have an example generator `bagan_gp_cells_v3_2_epoch100.h5` for running this code.
