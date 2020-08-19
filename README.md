@@ -10,7 +10,7 @@ Although BAGAN proposed an autoencoder initialization to stabilize the GAN train
   - We discuss the drawbacks of the original BAGAN and exemplify performance improvements over the original BAGAN and demonstrate the potential reasons.
 
 ### MNIST-Fashion (imbalanced-version) with BAGAN-GP
-<img src='imbalanced_mnist_bagan_gp.gif' width='600px'>
+<img src='train_results/imbalanced_mnist_bagan_gp.gif' width='600px'>
 
 ### Dataset
 1) `MNIST Fashion` and `CIFAR-10`. We also create an imbalanced version for these two datasets.  
