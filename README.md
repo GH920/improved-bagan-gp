@@ -1,4 +1,5 @@
 # Improved-Balancing-GAN-Minority-class-Image-Generation
+
 ### Abstract
 Generative adversarial networks (GANs) are one of the most powerful generative models, but always require a large and balanced dataset to train. Traditional GANs are not applicable to generate minority-class images in a highly imbalanced dataset. Balancing GAN (BAGAN) is proposed to mitigate this problem, but it is unstable when images in different classes look similar, e.g. flowers and cells. In this work, we propose a supervised autoencoder with an intermediate embedding model to disperse the labeled latent vectors. With the improved autoencoder initialization, we also build an architecture of BAGAN with gradient penalty (BAGAN-GP). Our proposed model overcomes the unstable issue in original BAGAN and converges faster to high quality generations. Our model achieves high performance on the imbalanced scale-down version of MNIST Fashion, CIFAR-10, and one small-scale medical image dataset.
 
@@ -7,6 +8,9 @@ Although BAGAN proposed an autoencoder initialization to stabilize the GAN train
   - We improve the loss function of BAGAN with gradient penalty and build the corresponding architecture of the generator and the discriminator (BAGAN-GP).
   - We propose a novel architecture of autoencoder with an intermediate embedding model, which helps the autoencoder learn the label information directly.
   - We discuss the drawbacks of the original BAGAN and exemplify performance improvements over the original BAGAN and demonstrate the potential reasons.
+
+### MNIST-Fashion (imbalanced-version) with BAGAN-GP
+<img src='imbalanced_mnist_bagan_gp.gif' width='600px'>
 
 ### Dataset
 1) `MNIST Fashion` and `CIFAR-10`. We also create an imbalanced version for these two datasets.  
