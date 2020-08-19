@@ -6,4 +6,7 @@
 <img src='imbalanced_mnist_bagan_gp.gif' width='600px'>
 
 ## Cells with BAGAN-GP (ours)
-<img src='training_demo_bagan_gp.gif' width='600px'>
+<img src='training_demo_bagan_gp.gif' width='400px'>
+
+## Cells with cDRAGAN
+<img src='training_demo_bagan_gp.gif' width='400px'>
