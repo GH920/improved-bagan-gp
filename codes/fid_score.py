@@ -6,8 +6,8 @@ from numpy import iscomplexobj
 from numpy import asarray
 from numpy.random import shuffle
 from scipy.linalg import sqrtm
-from keras.applications.inception_v3 import InceptionV3
-from keras.applications.inception_v3 import preprocess_input
+from tensorflow.keras.applications.inception_v3 import InceptionV3
+from tensorflow.keras.applications.inception_v3 import preprocess_input
 from tensorflow.keras.models import load_model
 from skimage.transform import resize
 
@@ -34,6 +34,7 @@ def calculate_fid(model, images1, images2):
 
 # prepare the inception v3 model
 model = InceptionV3(include_top=False, pooling='avg', input_shape=(299,299,3))
+
 # %% --------------------------------------- Calculate FID for Generator -----------------------------------------------
 # scale an array of images to a new size
 # Note: skimage will automatically change image range into [0, 1] after resizing
@@ -56,7 +57,7 @@ real_imgs = np.load('x_val.npy')
 real_label = np.load('y_val.npy')
 
 # calculate FID for each class
-n_classes = np.len(np.unique(real_label))
+n_classes = len(np.unique(real_label))
 sample_size = 1000
 for c in range(n_classes):
     ########### get generated samples by class ###########
@@ -94,4 +95,5 @@ for c in range(n_classes):
 
     # calculate fid
     fid = calculate_fid(model, gen_samples, real_samples)
-    print('FID(%d): %.3f' % (c, fid))
+    print('>>FID(%d): %.3f' % (c, fid))
+    print('-'*50)

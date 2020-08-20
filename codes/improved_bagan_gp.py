@@ -25,6 +25,14 @@ tf.random.set_seed(SEED)
 weight_init = glorot_normal(seed=SEED)
 
 # %% ---------------------------------- Data Preparation ---------------------------------------------------------------
+def change_image_shape(images):
+    shape_tuple = images.shape
+    if len(shape_tuple) == 3:
+        images = images.reshape(-1, shape_tuple[-1], shape_tuple[-1], 1)
+    elif shape_tuple == 4 and shape_tuple[-1] > 3:
+        images = images.reshape(-1, shape_tuple[-1], shape_tuple[-1], shape_tuple[1])
+    return images
+
 ######################## MNIST / CIFAR ##########################
 # # Load MNIST Fashion
 from tensorflow.keras.datasets.fashion_mnist import load_data
@@ -33,13 +41,8 @@ from tensorflow.keras.datasets.fashion_mnist import load_data
 
 # # Load training set
 (images, labels), (_,_) = load_data()
-shape_tuple = images.shape
-if len(shape_tuple) == 3:
-    images = images.reshape(-1, shape_tuple[-1], shape_tuple[-1], 1)
-elif shape_tuple == 4 and shape_tuple[-1] > 3:
-    images = images.reshape(-1, shape_tuple[-1], shape_tuple[-1], shape_tuple[1])
-else:
-    raise('Error of input image shape')
+images = change_image_shape(images)
+
 labels = labels.reshape(-1)
 # # # Convert from ints to floats
 # # images = images.astype('float32')
@@ -53,6 +56,7 @@ for c in range(1, 10):
 # # Use our datasets
 # images = np.load('x_train.npy')
 # labels = np.load('y_train.npy')
+# images = change_image_shape(images)
 
 ######################## Preprocessing ##########################
 # Set channel
@@ -552,4 +556,4 @@ for i in range(LEARNING_STEPS):
         im = imageio.imread(dir + fname, 'png')
         ims.append(im)
 print('saving as gif...')
-imageio.mimsave(dir + 'training_demo4.gif', ims, fps=3)
+imageio.mimsave(dir + 'training_demo.gif', ims, fps=3)
