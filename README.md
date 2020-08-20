@@ -1,4 +1,5 @@
 # Improved-Balancing-GAN-Minority-class-Image-Generation
+
 ### Abstract
 Generative adversarial networks (GANs) are one of the most powerful generative models, but always require a large and balanced dataset to train. Traditional GANs are not applicable to generate minority-class images in a highly imbalanced dataset. Balancing GAN (BAGAN) is proposed to mitigate this problem, but it is unstable when images in different classes look similar, e.g. flowers and cells. In this work, we propose a supervised autoencoder with an intermediate embedding model to disperse the labeled latent vectors. With the improved autoencoder initialization, we also build an architecture of BAGAN with gradient penalty (BAGAN-GP). Our proposed model overcomes the unstable issue in original BAGAN and converges faster to high quality generations. Our model achieves high performance on the imbalanced scale-down version of MNIST Fashion, CIFAR-10, and one small-scale medical image dataset.
 
@@ -16,10 +17,17 @@ Although BAGAN proposed an autoencoder initialization to stabilize the GAN train
 |Balanced|	4231  |	4165  |	4199  |	4211  |	4185  |	4217  |	4189  |	4241  |	4175  |	4187  |
 |Imbalanced|	4166  |	73  |	139 |	210 |	287 |	370 |	422 |	387 |	545 |	651 |  
 
+- MNIST-Fashion (imbalanced-version) with BAGAN-GP
+<img src='train_results/imbalanced_mnist_bagan_gp.gif' width='600px'>
+
+
 |`CIFAR-10`	|Airplane|	Automobile	|Bird	|Cat|	Deer|	Dog	|Frog|	Horse|	Ship	|Truck|
 | --- | --- |--- | --- |--- |--- | ---| ---| ---| ---| ---|
 |Balanced|	3527	|3523|	3500|	3458|	3563|	3455|	3535|	3509	|3453	|3476|
 |Imbalanced|3490|	71|	130|	221|	269|	349	|435|	485|	572|	628|
+
+- CIFAR-10 (balanced-version) with BAGAN-GP
+<img src='train_results/training_demo_bagan_gp_cifar.gif' width='600px'>
 
 2) Small-scale imbalanced medical image dataset: `Cells`. Download it with the link `wget https://storage.googleapis.com/exam-deep-learning/train.zip`.  
 
@@ -27,6 +35,9 @@ Although BAGAN proposed an autoencoder initialization to stabilize the GAN train
 | --- | --- |--- | --- |--- |
 |Train| 5600|	292|106|	887|
 |Test| 1400	|73	|27| 222|
+
+- Cells with BAGAN-GP
+<img src='train_results/training_demo_bagan_gp.gif' width='400px'>
 
 ### Networks
 Some neural networks we've referred to in the work:  
