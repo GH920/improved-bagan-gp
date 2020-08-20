@@ -26,8 +26,8 @@ Although BAGAN proposed an autoencoder initialization to stabilize the GAN train
 |Balanced|	3527	|3523|	3500|	3458|	3563|	3455|	3535|	3509	|3453	|3476|
 |Imbalanced|3490|	71|	130|	221|	269|	349	|435|	485|	572|	628|
 
-- CIFAR-10 (balanced-version) with BAGAN-GP
-<img src='train_results/training_demo_bagan_gp_cifar.gif' width='600px'>
+- CIFAR-10 (imbalanced-version) with BAGAN-GP
+<img src='train_results/imbalanced_cifar_bagan_gp.gif' width='600px'>
 
 2) Small-scale imbalanced medical image dataset: `Cells`. Download it with the link `wget https://storage.googleapis.com/exam-deep-learning/train.zip`.  
 
