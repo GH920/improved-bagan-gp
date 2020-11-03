@@ -1,4 +1,4 @@
-The paper link at arxiv. </a href='https://arxiv.org/abs/2011.00189'>Click here</a> [https://arxiv.org/abs/2011.00189].
+The paper link at arxiv. [<a href='https://arxiv.org/abs/2011.00189'>Click here</a> or go to https://arxiv.org/abs/2011.00189]
 # Improved-Balancing-GAN-Minority-class-Image-Generation
 
 ### Abstract
@@ -49,57 +49,4 @@ Some neural networks we've referred to in the work:
 Fréchet Inception Distance  
 <a href="https://www.codecogs.com/eqnedit.php?latex=FID=\ensuremath{\Vert}\mu_r-\mu_g\ensuremath{\Vert}^{2}&plus;Tr\left(\Sigma_r&plus;\Sigma_g-2\left(\Sigma_r\Sigma_g\right)^{1/2}\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?FID=\ensuremath{\Vert}\mu_r-\mu_g\ensuremath{\Vert}^{2}&plus;Tr\left(\Sigma_r&plus;\Sigma_g-2\left(\Sigma_r\Sigma_g\right)^{1/2}\right)" title="FID=\ensuremath{\Vert}\mu_r-\mu_g\ensuremath{\Vert}^{2}+Tr\left(\Sigma_r+\Sigma_g-2\left(\Sigma_r\Sigma_g\right)^{1/2}\right)" /></a>  
 FID calculates the feature-level distance between the generated sample distribution and the real sample distribution by Inception V3 network. A smaller FID means the generated distribution is closer to the real distribution. 
-
-### Reference materials
-[1] Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial nets. In Advances in Neural Information Processing Systems, pages 2672–2680, 2014.
-
-[2] J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li, and L. Fei-Fei. ImageNet: A Large-Scale Hierarchical Image Database. In CVPR09, 2009.
-
-[3] Gulrajani, Ishaan, Faruk Ahmed, Martin Arjovsky, Vincent Dumoulin, and Aaron C. Courville. "Improved training of wasserstein gans." In Advances in neural information processing systems, pp. 5767-5777. 2017.
-
-[4] Zhu, Jun-Yan, Taesung Park, Phillip Isola, and Alexei A. Efros. "Unpaired image-to-image translation using cycle-consistent adversarial networks." In Proceedings of the IEEE international conference on computer vision, pp. 2223-2232. 2017.
-
-[5] Almahairi, Amjad, Sai Rajeswar, Alessandro Sordoni, Philip Bachman, and Aaron Courville. "Augmented cyclegan: Learning many-to-many mappings from unpaired data." arXiv preprint arXiv:1802.10151 (2018).
-
-[6] Karras, Tero, Timo Aila, Samuli Laine, and Jaakko Lehtinen. "Progressive growing of gans for improved quality, stability, and variation." arXiv preprint arXiv:1710.10196 (2017).
-
-[7] Zhang, Han, Ian Goodfellow, Dimitris Metaxas, and Augustus Odena. "Self-attention generative adversarial networks." arXiv preprint arXiv:1805.08318 (2018).
-
-[8] Shaham, Tamar Rott, Tali Dekel, and Tomer Michaeli. "Singan: Learning a generative model from a single natural image." In Proceedings of the IEEE International Conference on Computer Vision, pp. 4570-4580. 2019.
-
-[9] Gui, Jie, Zhenan Sun, Yonggang Wen, Dacheng Tao, and Jieping Ye. "A review on generative adversarial networks: Algorithms, theory, and applications." arXiv preprint arXiv:2001.06937 (2020).
-
-[10] Odena, Augustus, Christopher Olah, and Jonathon Shlens. "Conditional image synthesis with auxiliary classifier gans." In International conference on machine learning, pp. 2642-2651. 2017.
-
-[11] Huang, Sheng-Wei, Che-Tsung Lin, Shu-Ping Chen, Yen-Yi Wu, Po-Hao Hsu, and Shang-Hong Lai. "Auggan: Cross domain adaptation with gan-based data augmentation." In Proceedings of the European Conference on Computer Vision (ECCV), pp. 718-731. 2018.
-
-[12] Mariani, Giovanni, Florian Scheidegger, Roxana Istrate, Costas Bekas, and Cristiano Malossi. "Bagan: Data augmentation with balancing gan." arXiv preprint arXiv:1803.09655 (2018).
-
-[13] Shin, Hoo-Chang, Neil A. Tenenholtz, Jameson K. Rogers, Christopher G. Schwarz, Matthew L. Senjem, Jeffrey L. Gunter, Katherine P. Andriole, and Mark Michalski. "Medical image synthesis for data augmentation and anonymization using generative adversarial networks." In International workshop on simulation and synthesis in medical imaging, pp. 1-11. Springer, Cham, 2018.
-
-[14] Kazeminia, Salome, Christoph Baur, Arjan Kuijper, Bram van Ginneken, Nassir Navab, Shadi Albarqouni, and Anirban Mukhopadhyay. "GANs for medical image analysis." arXiv preprint arXiv:1809.06222 (2018).
-
-[15] Srivastava, Akash, Lazar Valkov, Chris Russell, Michael U. Gutmann, and Charles Sutton. "Veegan: Reducing mode collapse in gans using implicit variational learning." In Advances in Neural Information Processing Systems, pp. 3308-3318. 2017.
-
-[16] Luo, Yun, and Bao-Liang Lu. "EEG data augmentation for emotion recognition using a conditional wasserstein GAN." In 2018 40th Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC), pp. 2535-2538. IEEE, 2018.
-
-[17] Shorten, Connor, and Taghi M. Khoshgoftaar. "A survey on image data augmentation for deep learning." Journal of Big Data 6, no. 1 (2019): 60.
-
-[18] Dowson, D. C., and B. V. Landau. "The Fréchet distance between multivariate normal distributions." Journal of multivariate analysis 12, no. 3 (1982): 450-455.
-
-[19] Barratt, Shane, and Rishi Sharma. "A note on the inception score." arXiv preprint arXiv:1801.01973 (2018).
-
-[20] Naveen Kodali, Jacob Abernethy, James Hays, and Zsolt Kira. How to train your DRAGAN. arXiv preprint arXiv:1705.07215, 2017.
-
-[21] Qi, Guo-Jun. "Loss-sensitive generative adversarial networks on lipschitz densities." International Journal of Computer Vision 128, no. 5 (2020): 1118-1140.
-
-[22] Zhao, Junbo, Michael Mathieu, and Yann LeCun. "Energy-based generative adversarial network." arXiv preprint arXiv:1609.03126 (2016).
-
-[23] Berthelot, David, Thomas Schumm, and Luke Metz. "Began: Boundary equilibrium generative adversarial networks." arXiv preprint arXiv:1703.10717 (2017).
-
-[24] Arjovsky, Martin, Soumith Chintala, and Léon Bottou. "Wasserstein gan." arXiv preprint arXiv:1701.07875 (2017).
-
-[25] Fedus, William, Mihaela Rosca, Balaji Lakshminarayanan, Andrew M. Dai, Shakir Mohamed, and Ian Goodfellow. "Many paths to equilibrium: GANs do not need to decrease a divergence at every step." arXiv preprint arXiv:1710.08446 (2017).
-
-[26] Shin, Hoo-Chang, Neil A. Tenenholtz, Jameson K. Rogers, Christopher G. Schwarz, Matthew L. Senjem, Jeffrey L. Gunter, Katherine P. Andriole, and Mark Michalski. "Medical image synthesis for data augmentation and anonymization using generative adversarial networks." In International workshop on simulation and synthesis in medical imaging, pp. 1-11. Springer, Cham, 2018.
 
