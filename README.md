@@ -1,4 +1,6 @@
-The paper link at arxiv. [<a href='https://arxiv.org/abs/2011.00189'>Click here</a> or go to https://arxiv.org/abs/2011.00189]
+### Cite this paper if it is helpful, thanks!
+Huang, G., Jafari, A.H. Enhanced balancing GAN: minority-class image generation. Neural Comput & Applic (2021). https://doi.org/10.1007/s00521-021-06163-8
+
 # Improved-Balancing-GAN-Minority-class-Image-Generation
 
 ### Abstract
